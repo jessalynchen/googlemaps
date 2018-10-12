@@ -1,11 +1,8 @@
 //must work for both address and for postal code
-
 //postal code validation
 // https://stackoverflow.com/questions/15774555/efficient-regex-for-canadian-postal-code-function
 //code to add in the form
 //add in the postal code input min = 0 and max=6
-
-
 // //clean up data first - then check if postal is work
 // function postalFilter (location) {
 //     console.log("inside postal function");

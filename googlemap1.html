@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
   <p>Click the button to get your coordinates.</p>
   <!--added type text-->
   <input type="text" id="userAddressInput" placeholder="Input Address Here..." />
@@ -33,7 +32,9 @@
   <!-- 
   <button onclick="getLocation()">Try It</button> -->
 
-  <div class="field_container"><label>Enter Postal Code</label><input type="text" name="postcode" id="location" /></div>
+  <!--add min and max-->
+  <div class="field_container"><label>Enter Postal Code</label><input type="text" name="postcode" id="location" required
+    minlength="6" maxlength="6" /></div>
   <button onclick="checkPostal()">Validate Postal Code</button>
 
   <p id="demo"></p>
