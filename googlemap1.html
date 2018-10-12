@@ -4,6 +4,7 @@
 <head>
   <title>Simple Map</title>
   <meta name="viewport" content="initial-scale=1.0">
+  <script src="postalcode-validation.js"></script>
   <meta charset="utf-8">
   <style>
     /* Always set the map height explicitly to define the size of the div
@@ -25,46 +26,33 @@
 <body>
 
   <p>Click the button to get your coordinates.</p>
-<!--added type text-->
-  <input type="text" id="userAddressInput" placeholder="Input Address Here..."/>
+  <!--added type text-->
+  <input type="text" id="userAddressInput" placeholder="Input Address Here..." />
 
   <button onclick="getMarkerFromAddressInput()">Search Address</button>
-<!-- 
+  <!-- 
   <button onclick="getLocation()">Try It</button> -->
+
+  <div class="field_container"><label>Enter Postal Code</label><input type="text" name="postcode" id="location" /></div>
+  <button onclick="checkPostal()">Validate Postal Code</button>
 
   <p id="demo"></p>
   <div id="map"></div>
- 
+
   <script>
 
     var coordinateArray = [];
     var userAddressInput = document.getElementById("userAddressInput")
-   
-    var x = document.getElementById("demo");
-    //1. onclick
-    //2. getLocation
-    //2. add marker on map
-    // function getLocation() {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(showPosition);
-    //     } else { 
-    //         x.innerHTML = "Geolocation is not supported by this browser.";
-    //     }
-    // }
-      
-//find the location
-      
-var myLatLng = {lat: 45.6565353, lng: -79.6010328};
 
+    var x = document.getElementById("demo");
+    //find the location
+    var myLatLng = { lat: 45.6565353, lng: -79.6010328 };
+    
     function initMap(currentCoord) {
-      
-      // var myLatLng = {lat: 45.6565353, lng: -79.6010328};
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: currentCoord || myLatLng
       });
-
-      addMarker();
       var marker = new google.maps.Marker({
         //update all arrays
         position: currentCoord,
@@ -72,7 +60,7 @@ var myLatLng = {lat: 45.6565353, lng: -79.6010328};
         title: 'Hello World!'
       });
     }
-
+  
       function getMarkerFromAddressInput() {
         var userAddressInputString = '55 St. George St., Toronto'
         // console log userAddressInput, get value, make userAddressInput equal value
@@ -81,63 +69,34 @@ var myLatLng = {lat: 45.6565353, lng: -79.6010328};
         document.getElementById("demo").innerHTML = userAddressInputString;
         console.log(userAddressInputString);
 
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${userAddressInputString}&key=AIzaSyCLHv2pVTUbfsWZt2s5tt2_59ZY1PNDxq4`)  
-        .then(response => {
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${userAddressInputString}&key=AIzaSyCLHv2pVTUbfsWZt2s5tt2_59ZY1PNDxq4`)
+          .then(response => {
             return addressLocation = response.json();
           })
           .then(addressLocation => {
             //console.log(addressLocation.results[0].geometry.location);
             var currentCoord = addressLocation.results[0].geometry.location;
-            
-          coordinateArray.push(currentCoord);
-          console.log(coordinateArray);
-          for (var key in coordinateArray) {
+
+            coordinateArray.push(currentCoord);
+            console.log(coordinateArray);
+            for (var key in coordinateArray) {
               console.log(coordinateArray.length);
 
               //var seeArray = JSON.stringify(coordinateArray);
-            // console.log(seeArray);
-        }
+              // console.log(seeArray);
+            }
             //call function
             initMap(currentCoord);
           })
-    
-    // function showPosition(position) {
-    //     x.innerHTML = "Latitude: " + position.coords.latitude + 
-    //     "<br>Longitude: " + position.coords.longitude;
-    //     //pass as one variable in a JSON
-    //     var currentCoord = {lat: position.coords.latitude, lng: position.coords.longitude
-    //     };
-   
-    //     console.log(currentCoord);
-    //     initMap(currentCoord);
-    //     // put this information on the backend
-    // }
-
-    // function initMap(currentCoord) {
-      
-    //     // var myLatLng = {lat: 45.6565353, lng: -79.6010328};
-    //     var map = new google.maps.Map(document.getElementById('map'), {
-    //       zoom: 4,
-    //       center: currentCoord || myLatLng
-    //     });
-    //     var marker = new google.maps.Marker({
-    //       //update all arrays
-    //       position: currentCoord,
-    //       map: map,
-    //       title: 'Hello World!'
-    //     });
-
-    
       }
-    
-</script>
+
+  </script>
 
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLHv2pVTUbfsWZt2s5tt2_59ZY1PNDxq4&callback=initMap" type="text/javascript"></script>
-
-
-
-
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLHv2pVTUbfsWZt2s5tt2_59ZY1PNDxq4&callback=initMap"
+    type="text/javascript"></script>
+<script src="postalcode-validation.js"></script>
 </body>
 
 </html>
+
