@@ -1,3 +1,5 @@
+//must work for both address and for postal code
+
 //postal code validation
 // https://stackoverflow.com/questions/15774555/efficient-regex-for-canadian-postal-code-function
 //code to add in the form
@@ -26,7 +28,7 @@ function checkPostal(location) {
     if (canPostal.test(postalCode)) {
         console.log("Valid Canadian postal code");
     } else {
-        console.log("Invalid postal code");
+        console.log("Please enter valid postal code or address");
     }
 };
 
