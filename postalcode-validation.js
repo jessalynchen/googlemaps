@@ -22,6 +22,7 @@ function checkPostal(location) {
     postalCode = postalCode.replace(/\s|-/g, "");
     // postalFilter(postalCode);
     var canPostal = new RegExp(/^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$/);
+   // /^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] [0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/
     if (canPostal.test(postalCode)) {
         console.log("Valid Canadian postal code");
     } else {
